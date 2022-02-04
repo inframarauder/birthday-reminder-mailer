@@ -1,6 +1,6 @@
 const mongodb = require("mongodb");
 
-const client = mongodb.MongoClient(process.env.DB_URI);
+const client = new mongodb.MongoClient(process.env.DB_URI);
 const db = client.db(process.env.DB_NAME);
 
 // This methods runs an aggregation on the DB and returns the
