@@ -1,0 +1,20 @@
+service: birthday-reminder-mailer
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  lambdaHashingVersion: 20201221
+  stage: prod
+  region: ap-south-1
+  environment:
+    DB_URI: ${self.custom.environment.DB_URI}
+    DB_NAME: ${self.custom.environment.DB_NAME}
+    EMAIL: ${self:custom.environment.EMAIL}
+    PASSWORD: ${self:custom.environment.PASSWORD}
+
+functions:
+  sendReminderEmail:
+    handler: src/index.sendReminderEmail
+    events:
+      - schedule: cron(0 0 * * *)
