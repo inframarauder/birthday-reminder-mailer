@@ -1,5 +1,5 @@
 service: birthday-reminder-mailer
-frameworkVersion: "2"
+frameworkVersion: "3.1.1"
 
 custom:
   defaultStage: prod
