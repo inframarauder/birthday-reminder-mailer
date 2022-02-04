@@ -1,6 +1,10 @@
 service: birthday-reminder-mailer
 frameworkVersion: "2"
 
+custom:
+  defaultStage: prod
+  environment: ${file(env.yml):default}
+
 provider:
   name: aws
   runtime: nodejs16.x
