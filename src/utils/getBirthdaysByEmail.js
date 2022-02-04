@@ -4,15 +4,15 @@ const mongodb = require("mongodb");
 // list of birthdays every user needs to be reminded of along with their emails
 
 module.exports = () => {
-	const client = new mongodb.MongoClient(process.env.DB_URI);
+	return new Promise((resolve, reject) => {
+		const client = new mongodb.MongoClient(process.env.DB_URI);
 
-	client
-		.connect()
-		.then(() => {
-			console.log("Connected to DB");
-			const db = client.db(process.env.DB_NAME);
+		client
+			.connect()
+			.then(() => {
+				console.log("Connected to DB");
+				const db = client.db(process.env.DB_NAME);
 
-			return new Promise((resolve, reject) => {
 				const date = new Date();
 				const day = date.getDate();
 				const month = date.getMonth() + 1;
@@ -28,10 +28,9 @@ module.exports = () => {
 						resolve(data);
 					})
 					.catch((err) => reject(err));
+			})
+			.catch((error) => {
+				reject(error);
 			});
-		})
-		.catch((error) => {
-			console.error("Error connecting to DB", error);
-			return;
-		});
+	});
 };
