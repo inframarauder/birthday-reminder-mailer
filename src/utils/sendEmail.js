@@ -18,7 +18,7 @@ const transport = nodemailer.createTransport({
 
 module.exports = (email, birthdays) =>
 	new Promise((resolve, reject) => {
-		const html = `<p>Hi</p><p>Here is a list of all your friends who have their birthdays today:</p><ol>`;
+		let html = `<p>Hi</p><p>Here is a list of all your friends who have their birthdays today:</p><ol>`;
 		birthdays.forEach((friend) => (html += `<li>${friend}</li>`));
 		html += `</ol>`;
 

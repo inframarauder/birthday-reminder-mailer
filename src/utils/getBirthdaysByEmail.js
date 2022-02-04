@@ -21,6 +21,7 @@ module.exports = () => {
 					.aggregate([
 						{ $match: { month, day } },
 						{ $group: { _id: "$email", birthdays: { $addToSet: "$friend" } } },
+						{ $project: { _id: 0, email: "$_id", birthdays: 1 } },
 					])
 					.toArray()
 					.then((data) => {
