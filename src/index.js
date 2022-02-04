@@ -9,6 +9,7 @@ module.exports.sendReminderEmail = async () => {
 			for (const birthdayReminder of birthdayReminders) {
 				const { email, birthdays } = birthdayReminder;
 				await sendEmail(email, birthdays);
+				console.log(`Sent email reminder to ${email}`);
 			}
 
 			return "Email(s) Sent!";
