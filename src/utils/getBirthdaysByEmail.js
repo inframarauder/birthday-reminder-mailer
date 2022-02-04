@@ -4,18 +4,18 @@ const mongodb = require("mongodb");
 // list of birthdays every user needs to be reminded of along with their emails
 
 module.exports = () => {
-	let db;
 	const client = new mongodb.MongoClient(process.env.DB_URI);
 
 	client
 		.connect()
 		.then(() => {
-			db = client.db(process.env.DB_NAME);
 			console.log("Connected to DB");
 		})
 		.catch((error) => {
 			console.error("Error connecting to DB", error);
 		});
+
+	const db = client.db(process.env.DB_NAME);
 
 	return new Promise((resolve, reject) => {
 		const date = new Date();
