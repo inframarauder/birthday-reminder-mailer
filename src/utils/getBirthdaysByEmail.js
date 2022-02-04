@@ -1,13 +1,16 @@
 const mongodb = require("mongodb");
 
-const client = new mongodb.MongoClient(process.env.DB_URI);
-const db = client.db(process.env.DB_NAME);
-
 // This methods runs an aggregation on the DB and returns the
 // list of birthdays every user needs to be reminded of along with their emails
 
-module.exports = () =>
-	new Promise((resolve, reject) => {
+module.exports = () => {
+	console.log(process.env.DB_URI);
+	console.log(process.env.DB_NAME);
+
+	const client = new mongodb.MongoClient(process.env.DB_URI);
+	const db = client.db(process.env.DB_NAME);
+
+	return new Promise((resolve, reject) => {
 		const date = new Date();
 		const day = date.getDate();
 		const month = date.getMonth() + 1;
@@ -24,3 +27,4 @@ module.exports = () =>
 			})
 			.catch((err) => reject(err));
 	});
+};
