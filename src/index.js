@@ -6,10 +6,10 @@ module.exports.sendReminderEmail = async () => {
 	try {
 		const birthdayReminders = await getBirthdaysByEmail();
 		if (birthdayReminders.length > 0) {
-			birthdayReminders.forEach((reminder) => {
-				const { email, birthdays } = reminder;
-				sendEmail(email, birthdays);
-			});
+			for (const birthdayReminder of birthdayReminders) {
+				const { email, birthdays } = birthdayReminder;
+				await sendEmail(email, birthdays);
+			}
 
 			return "Email(s) Sent!";
 		} else {
